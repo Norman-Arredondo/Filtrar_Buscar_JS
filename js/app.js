@@ -1,9 +1,28 @@
 /**Variables */
-const resultado = document.querySelector('#resultado');
+const marca = document.querySelector('#marca');
 const year = document.querySelector('#year');
+const minimo = document.querySelector('#minimo');
+const maximo = document.querySelector('#maximo');
+const puertas = document.querySelector('#puertas');
+const transmision = document.querySelector('#transmision');
+const color = document.querySelector('#color');
+const resultado = document.querySelector('#resultado');
+
 
 const max = new Date().getFullYear(); //Nos va a traer el año actual
 const min = max -10;
+
+
+/** Generar un objeto con la búsqueda */
+const datosBusqueda = {
+    marca : '',
+    year : '',
+    minimo : '',
+    maximo : '',
+    puertas : '',
+    transmision : '',
+    color : '',
+};
 
 /**Eventos */
 // Una vez que cargue el HTML vamos a llamar la función
@@ -12,6 +31,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Llena las opciones de años
     llenarSelect();
+});
+
+
+/**Event Listener para los select de búsqueda */
+// Para leer un select puedes usar change, para cuando cambia el select
+marca.addEventListener('change', e => {
+    //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
+    datosBusqueda.marca = e.target.value;
+});
+
+year.addEventListener('change', e => {
+    //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
+    datosBusqueda.year = e.target.value;
+});
+
+minimo.addEventListener('change', e => {
+    //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
+    datosBusqueda.minimo = e.target.value;
+});
+
+maximo.addEventListener('change', e => {
+    //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
+    datosBusqueda.maximo = e.target.value;
+});
+
+puertas.addEventListener('change', e => {
+    //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
+    datosBusqueda.puertas = e.target.value;
+});
+
+transmision.addEventListener('change', e => {
+    //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
+    datosBusqueda.transmision = e.target.value;
+});
+
+color.addEventListener('change', e => {
+    //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
+    datosBusqueda.color = e.target.value;
+
+    console.log(datosBusqueda)
 });
 
 
