@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
 marca.addEventListener('change', e => {
     //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
     datosBusqueda.marca = e.target.value;
+
+    // Llamar a una función que se va a encargar de filtrar los autos
+    filtrarAuto();
 });
 
 year.addEventListener('change', e => {
@@ -102,4 +105,29 @@ function llenarSelect() {
         opcion.textContent = i; 
         year.appendChild(opcion); // Agrega las opciones de año al select
     }
+}
+
+
+//Funtion que filtra en base a la búsqueda
+function filtrarAuto() {
+    // Usualmetne es filter( arrow function) but It will be a high level function
+    const resultado = autos.filter(filtrarMarca);
+    console.log(resultado)
+}
+
+function filtrarMarca(auto) {
+    /*
+    if(datosBusqueda.marca ) {
+        return auto.marca === datosBusqueda.marca
+    }*/
+
+    const { marca } = datosBusqueda;
+    if(marca ) {
+        // Filtra el que tenga la misma marca cuando el usuario seleccione alguno
+        return auto.marca === marca
+    }
+
+    // Si el usuario no ha seleccionado alguno
+    return auto; 
+
 }
