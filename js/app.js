@@ -46,7 +46,9 @@ marca.addEventListener('change', e => {
 
 year.addEventListener('change', e => {
     //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
-    datosBusqueda.year = e.target.value;
+    datosBusqueda.year = parseInt(e.target.value);
+
+    filtrarAuto();
 });
 
 minimo.addEventListener('change', e => {
@@ -111,7 +113,7 @@ function llenarSelect() {
 //Funtion que filtra en base a la búsqueda
 function filtrarAuto() {
     // Usualmetne es filter( arrow function) but It will be a high level function
-    const resultado = autos.filter(filtrarMarca);
+    const resultado = autos.filter(filtrarMarca).filter( filtrarYear );
     console.log(resultado)
 }
 
@@ -124,10 +126,24 @@ function filtrarMarca(auto) {
     const { marca } = datosBusqueda;
     if(marca ) {
         // Filtra el que tenga la misma marca cuando el usuario seleccione alguno
-        return auto.marca === marca
+        return auto.marca === marca;
     }
 
     // Si el usuario no ha seleccionado alguno
     return auto; 
 
+}
+
+function filtrarYear(auto) {
+    // En un formulario vienen como string
+    // console.log(typeof year);
+    // console.log(typeof auto.year)
+    const { year } = datosBusqueda;
+    if(year) {
+        // Filtra el que tenga la misma marca cuando el usuario seleccione alguno
+        return auto.year === year; // Operador estricto, revisa el valor y también el tipo de dato
+    }
+
+    // Si el usuario no ha seleccionado alguno
+    return auto; 
 }
