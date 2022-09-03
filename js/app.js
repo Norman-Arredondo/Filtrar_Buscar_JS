@@ -54,6 +54,8 @@ year.addEventListener('change', e => {
 minimo.addEventListener('change', e => {
     //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
     datosBusqueda.minimo = e.target.value;
+
+    filtrarAuto();
 });
 
 maximo.addEventListener('change', e => {
@@ -125,7 +127,7 @@ function llenarSelect() {
 //Funtion que filtra en base a la búsqueda
 function filtrarAuto() {
     // Usualmetne es filter( arrow function) but It will be a high level function
-    const resultado = autos.filter(filtrarMarca).filter( filtrarYear );
+    const resultado = autos.filter(filtrarMarca).filter( filtrarYear ).filter( filtrarMinimo);
     //console.log(resultado)
     mostrarAutos(resultado);
 }
@@ -159,4 +161,16 @@ function filtrarYear(auto) {
 
     // Si el usuario no ha seleccionado alguno
     return auto; 
+}
+
+// Simepre vaa tomar la iteración del objeto actual
+function filtrarMinimo( auto ) {
+    const { minimo } = datosBusqueda; // Extraigo el mínimo
+    if( minimo ) { // Se ejecuta si hay un mínimo
+        
+        return auto.precio <= minimo; // Me interesan los de precio mínimo
+    }
+
+    // Si el usuario no ha seleccionado alguno
+    return auto;
 }
