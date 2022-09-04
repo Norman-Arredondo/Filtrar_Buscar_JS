@@ -67,19 +67,22 @@ maximo.addEventListener('change', e => {
 
 puertas.addEventListener('change', e => {
     //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
-    datosBusqueda.puertas = e.target.value;
+    datosBusqueda.puertas = parseInt(e.target.value);
+
+     // Llamar a una función que se va a encargar de filtrar los autos
+     filtrarAuto();
 });
 
 transmision.addEventListener('change', e => {
     //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
     datosBusqueda.transmision = e.target.value;
+    filtrarAuto();
 });
 
 color.addEventListener('change', e => {
     //console.log(e.target.value); // Valor que se selecciona Audi, BMW...
     datosBusqueda.color = e.target.value;
-
-    console.log(datosBusqueda)
+    filtrarAuto();
 });
 
 
@@ -129,7 +132,7 @@ function llenarSelect() {
 //Funtion que filtra en base a la búsqueda
 function filtrarAuto() {
     // Usualmetne es filter( arrow function) but It will be a high level function
-    const resultado = autos.filter(filtrarMarca).filter( filtrarYear ).filter( filtrarMinimo).filter( filtrarMaximo );
+    const resultado = autos.filter(filtrarMarca).filter( filtrarYear ).filter( filtrarMinimo).filter( filtrarMaximo ).filter( filtrarPuertas ).filter(filtrarTransmision).filter(filtrarColor);
     //console.log(resultado)
     mostrarAutos(resultado);
 }
@@ -145,7 +148,6 @@ function filtrarMarca(auto) {
         // Filtra el que tenga la misma marca cuando el usuario seleccione alguno
         return auto.marca === marca;
     }
-
     // Si el usuario no ha seleccionado alguno
     return auto; 
 
@@ -160,7 +162,6 @@ function filtrarYear(auto) {
         // Filtra el que tenga la misma marca cuando el usuario seleccione alguno
         return auto.year === year; // Operador estricto, revisa el valor y también el tipo de dato
     }
-
     // Si el usuario no ha seleccionado alguno
     return auto; 
 }
@@ -172,7 +173,6 @@ function filtrarMinimo( auto ) {
         
         return auto.precio >= minimo; // Me interesan los de precio mínimo
     }
-
     // Si el usuario no ha seleccionado alguno
     return auto;
 }
@@ -183,7 +183,34 @@ function filtrarMaximo( auto ) {
         
         return auto.precio <= maximo; // Me interesan los de precio máximo
     }
-
     // Si el usuario no ha seleccionado alguno
     return auto;
+}
+
+function filtrarPuertas( auto ) {
+    const { puertas } = datosBusqueda;
+    if(puertas) {
+        
+        return auto.puertas === puertas; 
+    }
+    // Si el usuario no ha seleccionado alguno
+    return auto; 
+}
+
+function filtrarTransmision( auto ) {
+    const { transmision } = datosBusqueda;
+    if(transmision) {
+        return auto.transmision === transmision; 
+    }
+    // Si el usuario no ha seleccionado alguno
+    return auto; 
+}
+
+function filtrarColor( auto ) {
+    const { color } = datosBusqueda;
+    if(color) {
+        return auto.color === color; 
+    }
+    // Si el usuario no ha seleccionado alguno
+    return auto; 
 }
