@@ -6,6 +6,8 @@ const maximo = document.querySelector('#maximo');
 const puertas = document.querySelector('#puertas');
 const transmision = document.querySelector('#transmision');
 const color = document.querySelector('#color');
+
+// Contenedor para los resultados
 const resultado = document.querySelector('#resultado');
 
 
@@ -133,8 +135,22 @@ function llenarSelect() {
 function filtrarAuto() {
     // Usualmetne es filter( arrow function) but It will be a high level function
     const resultado = autos.filter(filtrarMarca).filter( filtrarYear ).filter( filtrarMinimo).filter( filtrarMaximo ).filter( filtrarPuertas ).filter(filtrarTransmision).filter(filtrarColor);
-    //console.log(resultado)
-    mostrarAutos(resultado);
+
+    // Si hay algo
+    if(resultado.length) {
+        mostrarAutos(resultado);
+    } else {
+        noResultado();
+    }
+}
+
+function noResultado() {
+    limpiarHTML();
+
+    const noResultado = document.createElement('div');
+    noResultado.classList.add('alerta', 'error');
+    noResultado.textContent = 'No hay resultados, intenta con otra búsqueda';
+    resultado.appendChild(noResultado);
 }
 
 function filtrarMarca(auto) {
